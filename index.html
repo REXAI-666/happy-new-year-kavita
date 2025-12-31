@@ -20,7 +20,8 @@
             min-height: 100vh;
             color: white;
             padding: 20px;
-            /* REMOVED overflow: hidden - Yeh scroll rok raha tha */
+            position: relative;
+            overflow-x: hidden; /* Only horizontal hide */
         }
         
         @keyframes gradientBG {
@@ -29,24 +30,79 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Rose Petals Animation - Fixed position */
+        /* IMPROVED ROSE PETALS - UPWARD FLOATING */
         .rose-petal {
-            position: fixed; /* Changed to fixed */
-            width: 40px;
-            height: 40px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FF69B4" d="M50,20 C60,10 80,15 85,30 C90,45 80,60 70,65 C60,70 45,65 40,55 C35,45 30,30 35,20 C40,10 50,10 50,20 Z"/></svg>') no-repeat;
+            position: fixed;
+            width: 60px; /* Bigger size */
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FF1493" d="M50,10 C60,0 80,5 85,20 C90,35 80,50 70,55 C60,60 45,55 40,45 C35,35 30,20 35,10 C40,0 50,0 50,10 Z"/><path fill="%23FF69B4" d="M50,15 C55,8 70,12 75,22 C80,32 70,42 65,45 C60,48 50,45 47,38 C44,31 40,22 45,15 C50,8 50,8 50,15 Z"/></svg>');
             background-size: contain;
-            z-index: 1;
+            background-repeat: no-repeat;
+            z-index: 9999; /* HIGHEST Z-INDEX - Sabse upar */
             pointer-events: none;
-            opacity: 0.8;
+            opacity: 0.9; /* More visible */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7)); /* Glow effect */
         }
         
+        /* Floating UPWARD Animation */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+                transform: translateY(90vh) translateX(10px) rotate(10deg) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) translateX(20px) rotate(180deg) scale(1);
+            }
+            90% {
+                opacity: 0.8;
+                transform: translateY(10vh) translateX(-10px) rotate(350deg) scale(1.2);
+            }
+            100% {
+                transform: translateY(-100px) translateX(0) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Floating Hearts */
+        .floating-heart {
+            position: fixed;
+            font-size: 30px;
+            color: #FF1493;
+            z-index: 9998;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: heartFloat 8s linear infinite;
+        }
+        
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Container */
         .container {
             max-width: 900px;
             width: 100%;
             margin: 0 auto;
             position: relative;
-            z-index: 2;
+            z-index: 100; /* Content below petals */
             animation: fadeIn 1.5s ease;
         }
         
@@ -66,7 +122,7 @@
                 inset 0 0 100px rgba(255, 182, 193, 0.2);
             text-align: center;
             position: relative;
-            margin-bottom: 50px; /* Added margin for scroll */
+            margin-bottom: 50px;
         }
         
         h1 {
@@ -213,31 +269,25 @@
             .card { padding: 30px 20px; }
             .btn { padding: 15px 35px; font-size: 1.1rem; }
             .section-title { font-size: 1.8rem; }
+            .rose-petal { width: 40px; height: 40px; }
         }
         
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
+        /* Sparkles */
+        .sparkle {
+            position: fixed;
             width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            z-index: 9997;
+            pointer-events: none;
+            animation: sparkleTwinkle 1.5s infinite;
+            box-shadow: 0 0 10px white;
         }
         
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #FF69B4, #FFD700);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #FF1493, #FFA500);
-        }
-        
-        /* Extra Space for Scroll */
-        .extra-space {
-            height: 100px;
-            opacity: 0;
+        @keyframes sparkleTwinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -249,7 +299,6 @@
     </audio>
     
     <audio id="myVoiceAudio">
-        <!-- YOUR LIME WIRE VOICE LINK -->
         <source src="https://limewire.com/d/AbkhM#ZSvFj44p0e" type="audio/mpeg">
     </audio>
 
@@ -284,8 +333,8 @@
                 </h2>
                 
                 <div class="controls">
-                    <button class="btn btn-gold" onclick="startRosePetals()">
-                        <i class="fas fa-rose"></i> गुलाब की पंखुड़ियाँ
+                    <button class="btn btn-gold" onclick="startFloatingEffects()">
+                        <i class="fas fa-rose"></i> गुलाब उड़ाएं
                     </button>
                     
                     <button class="btn" onclick="playBackgroundMusic()">
@@ -346,9 +395,6 @@
                     </span>
                 </p>
             </div>
-            
-            <!-- Extra space for better scroll -->
-            <div class="extra-space"></div>
         </div>
     </div>
 
@@ -357,66 +403,125 @@
         const bgMusic = document.getElementById('bgMusic');
         const myVoice = document.getElementById('myVoiceAudio');
         
-        // Create Rose Petals
-        function createRosePetals(count = 50) {
+        // Create Floating Rose Petals (UPWARD)
+        function createFloatingPetals(count = 30) {
+            const petalColors = [
+                '#FF1493', // Deep pink
+                '#FF69B4', // Hot pink
+                '#FFB6C1', // Light pink
+                '#DB7093', // Pale violet red
+                '#FFC0CB'  // Pink
+            ];
+            
             for(let i = 0; i < count; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'rose-petal';
                 
                 // Random size
-                const size = Math.random() * 30 + 20;
+                const size = Math.random() * 40 + 40; // 40-80px
                 petal.style.width = `${size}px`;
                 petal.style.height = `${size}px`;
                 
-                // Random starting position
+                // Random starting position (bottom)
                 petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.top = '-50px';
+                petal.style.bottom = '-50px'; // Start from bottom
                 
-                // Random color variation
-                petal.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+                // Random color
+                const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+                petal.style.filter = `drop-shadow(0 0 8px ${color}) hue-rotate(${Math.random() * 90}deg)`;
                 
                 document.body.appendChild(petal);
                 
-                // Animation
-                const duration = Math.random() * 10 + 10;
-                const delay = Math.random() * 5;
+                // UPWARD Animation
+                const duration = Math.random() * 15 + 15; // 15-30 seconds
+                const delay = Math.random() * 3;
                 
                 const animation = petal.animate([
                     { 
-                        transform: `translateY(0) translateX(0) rotate(0deg)`,
-                        opacity: 0.8
+                        transform: 'translateY(0) translateX(0) rotate(0deg) scale(0.7)',
+                        opacity: 0
                     },
                     { 
-                        transform: `translateY(${window.innerHeight + 100}px) 
-                                   translateX(${Math.random() * 200 - 100}px) 
-                                   rotate(${Math.random() * 720}deg)`,
-                        opacity: 0
+                        transform: `translateY(-${window.innerHeight + 200}px) 
+                                   translateX(${Math.random() * 100 - 50}px) 
+                                   rotate(${Math.random() * 720}deg) 
+                                   scale(${Math.random() * 0.5 + 1})`,
+                        opacity: 0.9
                     }
                 ], {
                     duration: duration * 1000,
                     delay: delay * 1000,
-                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                    easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)'
                 });
                 
                 // Remove after animation
                 animation.onfinish = () => {
                     petal.remove();
-                    // Create new petal for continuous effect
-                    if (document.querySelectorAll('.rose-petal').length < 30) {
-                        createRosePetals(1);
-                    }
                 };
             }
         }
         
-        // Start Rose Petals
-        function startRosePetals() {
-            createRosePetals(30);
-            showMessage("🌸 गुलाब की पंखुड़ियाँ बरस रही हैं...!");
+        // Create Floating Hearts
+        function createFloatingHearts(count = 15) {
+            for(let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.bottom = '-30px';
+                heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                document.body.appendChild(heart);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.remove();
+                    }
+                }, 9000);
+            }
+        }
+        
+        // Create Sparkles
+        function createSparkles(count = 20) {
+            for(let i = 0; i < count; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.body.appendChild(sparkle);
+                
+                // Remove after some time
+                setTimeout(() => sparkle.remove(), 3000);
+            }
+        }
+        
+        // Start All Floating Effects
+        function startFloatingEffects() {
+            createFloatingPetals(40);
+            createFloatingHearts(20);
+            createSparkles(30);
             
-            // Also play soft music
+            showMessage("🌸 गुलाब और दिल उड़ रहे हैं...!");
+            
+            // Play soft music
             bgMusic.volume = 0.3;
-            bgMusic.play().catch(e => console.log("Music play error:", e));
+            bgMusic.play().catch(e => console.log("Music:", e));
+            
+            // Continue effects
+            setInterval(() => {
+                if (Math.random() > 0.5) {
+                    createFloatingPetals(5);
+                }
+                if (Math.random() > 0.7) {
+                    createFloatingHearts(3);
+                }
+            }, 3000);
         }
         
         // Play Background Music
@@ -424,9 +529,9 @@
             bgMusic.volume = 0.5;
             bgMusic.play().then(() => {
                 showMessage("🎵 Happy New Year Music चल रहा है!");
-                createRosePetals(20);
+                createFloatingPetals(15);
             }).catch(e => {
-                showMessage("कृपया पहले 'गुलाब की पंखुड़ियाँ' बटन दबाएं");
+                showMessage("कृपया पहले 'गुलाब उड़ाएं' बटन दबाएं");
             });
         }
         
@@ -434,7 +539,8 @@
         function playMyVoice() {
             myVoice.play().then(() => {
                 showMessage("🎤 विशाल की आवाज चल रही है... सुनिए!");
-                createRosePetals(15);
+                createFloatingPetals(10);
+                createSparkles(15);
             }).catch(e => {
                 showMessage("कृपया audio player में play button दबाएं");
             });
@@ -445,7 +551,7 @@
             const msg = document.createElement('div');
             msg.innerHTML = `
                 <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                     background: rgba(139, 0, 0, 0.8); color: #FFD700; padding: 15px 30px;
+                     background: rgba(139, 0, 0, 0.9); color: #FFD700; padding: 15px 30px;
                      border-radius: 50px; border: 2px solid #FF69B4; z-index: 10000;
                      font-size: 1.2rem; white-space: nowrap; animation: slideDown 0.5s;">
                     <i class="fas fa-star"></i> ${text}
@@ -455,10 +561,21 @@
             setTimeout(() => msg.remove(), 3000);
         }
         
-        // Auto-start rose petals after 3 seconds
+        // Auto-start some effects
         setTimeout(() => {
-            createRosePetals(20);
-        }, 3000);
+            createFloatingPetals(10);
+            createSparkles(10);
+        }, 2000);
+        
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translate(-50%, -100%); opacity: 0; }
+                to { transform: translate(-50%, 0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
