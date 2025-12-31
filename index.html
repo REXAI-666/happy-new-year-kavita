@@ -6,14 +6,6 @@
     <title>दीदी के लिए विशाल का Special New Year Surprise</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #FF6B8B;
-            --secondary: #6A11CB;
-            --accent: #00FF9D;
-            --gold: #FFD700;
-            --dark: #0F0F23;
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -21,8 +13,8 @@
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(-45deg, #0F0F23, #1A1A2E, #16213E, #0F3460);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
@@ -30,7 +22,6 @@
             justify-content: center;
             align-items: center;
             color: white;
-            overflow-x: hidden;
             padding: 20px;
         }
         
@@ -41,417 +32,374 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 800px;
             width: 100%;
-            position: relative;
+            animation: fadeIn 1s ease;
         }
         
-        .floating-element {
-            position: absolute;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .card {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            z-index: 1;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .float1 { width: 80px; height: 80px; top: 10%; left: 5%; animation-delay: 0s; }
-        .float2 { width: 60px; height: 60px; top: 70%; right: 10%; animation-delay: 1s; }
-        .float3 { width: 100px; height: 100px; bottom: 20%; left: 15%; animation-delay: 2s; }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
-            padding: 50px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
-                0 25px 45px rgba(0, 0, 0, 0.2),
-                inset 0 0 100px rgba(255, 107, 139, 0.1);
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-        }
-        
-        .header {
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
-            margin-bottom: 30px;
         }
         
-        .title {
-            font-size: 3.2rem;
-            background: linear-gradient(45deg, var(--primary), var(--gold), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 15px;
-            animation: titleGlow 3s infinite alternate;
-        }
-        
-        @keyframes titleGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(255, 107, 139, 0.5)); }
-            100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7)); }
+        h1 {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
         .didi-name {
             font-size: 4rem;
-            font-family: 'Dancing Script', cursive;
-            color: var(--gold);
-            text-align: center;
+            color: #FF6B6B;
             margin: 30px 0;
-            position: relative;
-            display: inline-block;
-            padding: 0 25px;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+            animation: glow 2s infinite alternate;
         }
         
-        .didi-name::before, .didi-name::after {
-            content: '✨';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: sparkle 1.5s infinite;
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 107, 107, 0.5); }
+            to { text-shadow: 0 0 20px rgba(255, 107, 107, 0.8); }
         }
         
-        .didi-name::before { left: 0; }
-        .didi-name::after { right: 0; }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        
-        .message-container {
-            background: linear-gradient(135deg, rgba(255, 107, 139, 0.15), rgba(106, 17, 203, 0.15));
+        .message-box {
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 20px;
             padding: 30px;
             margin: 20px 0;
-            border-left: 6px solid var(--accent);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .message-text {
-            font-size: 1.5rem;
-            line-height: 1.7;
-            text-align: center;
+            border-left: 5px solid #00FF9D;
+            font-size: 1.3rem;
+            line-height: 1.8;
         }
         
         .highlight {
-            color: var(--accent);
+            color: #FFD700;
             font-weight: bold;
         }
         
-        .voice-section {
-            text-align: center;
+        /* Audio Section */
+        .audio-section {
             margin: 40px 0;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            border: 2px dashed var(--gold);
         }
         
-        .voice-title {
-            font-size: 2.2rem;
-            color: var(--accent);
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
+        .audio-title {
+            font-size: 2rem;
+            color: #00FF9D;
+            margin-bottom: 20px;
         }
         
-        .magic-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        /* Buttons */
+        .btn {
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
             color: white;
             border: none;
-            padding: 20px 50px;
-            font-size: 1.4rem;
-            border-radius: 60px;
-            cursor: pointer;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-weight: bold;
-            transition: all 0.4s;
-            box-shadow: 0 10px 20px rgba(255, 107, 139, 0.4);
-        }
-        
-        .magic-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.6);
-        }
-        
-        .voice-player {
-            display: none;
-            margin-top: 30px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            animation: fadeIn 0.8s ease;
-        }
-        
-        .voice-player.show {
-            display: block;
-        }
-        
-        .play-btn {
-            background: var(--accent);
-            color: #000;
-            border: none;
             padding: 15px 40px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             border-radius: 50px;
             cursor: pointer;
-            margin: 15px auto;
-            display: block;
+            margin: 10px;
             font-weight: bold;
             transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--accent);
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 65, 108, 0.4);
         }
         
+        .btn-green {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+        }
+        
+        .btn-blue {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+        }
+        
+        /* Audio Player */
+        .audio-player {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+        }
+        
+        audio {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .music-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
         .footer {
-            text-align: center;
             margin-top: 40px;
-            padding-top: 25px;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
         }
         
         .brother-name {
             font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--accent), var(--gold));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #00FF9D;
             margin: 15px 0;
-            font-family: 'Dancing Script', cursive;
+        }
+        
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            z-index: 1000;
+            pointer-events: none;
         }
         
         @media (max-width: 768px) {
-            .title { font-size: 2.2rem; }
+            h1 { font-size: 2.2rem; }
             .didi-name { font-size: 3rem; }
-            .message-text { font-size: 1.3rem; }
-            .glass-card { padding: 30px 20px; }
-            .magic-btn { padding: 16px 35px; font-size: 1.2rem; }
-            .voice-title { font-size: 1.8rem; }
-        }
-        
-        .heartbeat {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            .card { padding: 25px; }
+            .btn { padding: 12px 30px; font-size: 1rem; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Floating Background Elements -->
-    <div class="floating-element float1"></div>
-    <div class="floating-element float2"></div>
-    <div class="floating-element float3"></div>
+    <!-- Background Music (Hidden) -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-new-year-983.mp3" type="audio/mpeg">
+    </audio>
     
+    <!-- Your Voice Recording -->
+    <audio id="myVoice">
+        <!-- DIRECT WORKING AUDIO LINK -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <!-- TEMPORARY TEST AUDIO - Baad mein replace karna hai -->
+    </audio>
+
     <div class="container">
-        <div class="glass-card">
-            <!-- Header -->
-            <div class="header">
-                <h1 class="title heartbeat">🎊 Happy New Year 2026! 🎊</h1>
-            </div>
+        <div class="card">
+            <h1>🎉 Happy New Year 2026! 🎉</h1>
             
-            <!-- Didi's Name -->
-            <div style="text-align: center;">
-                <h2 class="didi-name">कविता</h2>
-            </div>
+            <div class="didi-name">कविता</div>
             
-            <!-- Message -->
-            <div class="message-container">
-                <div class="message-text">
-                    <p>मेरी प्यारी दीदी,</p>
-                    <p>ये नया साल आपके लिए लाये <span class="highlight">अनगिनत खुशियाँ</span>,<br>
-                    <span class="highlight">सफलता की बहार</span> और <span class="highlight">प्यार की सौगात</span>! 💝</p>
-                </div>
-            </div>
-            
-            <!-- Special Message -->
-            <div class="message-container" style="background: rgba(255, 215, 0, 0.1);">
-                <div class="message-text">
-                    <i class="fas fa-quote-left" style="color: var(--gold);"></i>
-                    <p style="font-size: 1.4rem; padding: 15px;">
+            <div class="message-box">
+                <p>मेरी प्यारी दीदी,</p>
+                <p>ये नया साल आपके लिए लाये <span class="highlight">खुशियों की बरसात</span>,<br>
+                <span class="highlight">सफलता का आगमन</span> और <span class="highlight">प्यार का संदेश</span>!</p>
+                
+                <div style="margin: 25px 0; padding: 20px; background: rgba(255,215,0,0.1); border-radius: 15px;">
+                    <p style="font-style: italic; color: #FFD700;">
                         "हैप्पी न्यू ईयर! दूर रहने के बावजूद, तुम्हारे लिए मेरे दिल में हमेशा इज्ज़त और प्यार है। 
                         2026 में मेरी सबसे बड़ी इच्छा है कि हम कभी साथ में कहीं घूमने जाएँ।"
                     </p>
-                    <i class="fas fa-quote-right" style="color: var(--gold);"></i>
                 </div>
             </div>
             
-            <!-- Voice Recording Section -->
-            <div class="voice-section">
-                <h2 class="voice-title">
-                    <i class="fas fa-microphone-alt heartbeat"></i>
-                    दीदी, मेरी आवाज़ सुनो!
-                    <i class="fas fa-headphones heartbeat"></i>
+            <!-- Audio Section -->
+            <div class="audio-section">
+                <h2 class="audio-title">
+                    <i class="fas fa-music"></i> Special Audio Message
                 </h2>
                 
-                <p style="font-size: 1.3rem; margin-bottom: 25px; color: var(--accent);">
-                    नीचे बटन दबाकर मेरी विशेष New Year विश सुने
-                </p>
-                
-                <!-- Magic Button -->
-                <button class="magic-btn" id="voiceBtn">
-                    <i class="fas fa-play-circle"></i>
-                    यहाँ क्लिक करें दीदी
-                    <i class="fas fa-magic"></i>
-                </button>
-                
-                <!-- Voice Player -->
-                <div class="voice-player" id="voicePlayer">
-                    <h3 style="color: var(--gold); margin-bottom: 20px;">
-                        <i class="fas fa-volume-up"></i> विशाल की आवाज़ में...
-                    </h3>
-                    
-                    <!-- Audio Player -->
-                    <audio id="myAudio" controls style="width: 100%; margin: 20px 0;">
-                        <source src="https://voca.ro/14hESlE8PcxS" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    
-                    <!-- Play Button -->
-                    <button class="play-btn" onclick="playAudio()">
-                        <i class="fas fa-play"></i> प्ले करें
+                <div class="music-controls">
+                    <button class="btn btn-green" onclick="playBackgroundMusic()">
+                        <i class="fas fa-play"></i> Background Music चलाएं
                     </button>
                     
-                    <p style="margin-top: 20px; color: var(--accent); font-size: 1.1rem;">
-                        <i class="fas fa-heart" style="color: #FF6B8B;"></i>
-                        ये सन्देश सिर्फ आपके लिए है दीदी!
+                    <button class="btn btn-blue" onclick="playMyVoice()">
+                        <i class="fas fa-microphone"></i> मेरी आवाज सुनें
+                    </button>
+                    
+                    <button class="btn" onclick="playBoth()">
+                        <i class="fas fa-volume-up"></i> दोनों एक साथ
+                    </button>
+                </div>
+                
+                <!-- Voice Player -->
+                <div class="audio-player" id="voicePlayer">
+                    <h3 style="color: #FFD700;">
+                        <i class="fas fa-volume-up"></i> विशाल की आवाज़
+                    </h3>
+                    <audio id="voiceAudio" controls>
+                        <!-- DIRECT AUDIO LINK YAHAN AAYEGA -->
+                        <source src="" type="audio/mpeg">
+                    </audio>
+                    <p style="margin-top: 10px; color: #00FF9D;">
+                        <i class="fas fa-info-circle"></i> Play button dabayein aur सुनें
                     </p>
+                </div>
+                
+                <!-- Background Music Player -->
+                <div class="audio-player">
+                    <h3 style="color: #FFD700;">
+                        <i class="fas fa-music"></i> Happy New Year Music
+                    </h3>
+                    <audio id="musicPlayer" controls>
+                        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-new-year-983.mp3" type="audio/mpeg">
+                    </audio>
                 </div>
             </div>
             
-            <!-- Wish Fulfillment -->
-            <div class="message-container" style="text-align: center;">
-                <h3 style="color: var(--accent); font-size: 1.8rem; margin-bottom: 15px;">
-                    <i class="fas fa-plane-departure"></i> 2026 की Special Wish
+            <!-- Wish Section -->
+            <div class="message-box" style="text-align: center;">
+                <h3 style="color: #00FF9D; margin-bottom: 15px;">
+                    <i class="fas fa-plane"></i> 2026 की खास इच्छा
                 </h3>
-                <div style="font-size: 2rem; color: var(--gold); margin: 15px 0;">
-                    ✈️ 🗺️ 🏔️ 🏝️
+                <div style="font-size: 2.5rem; margin: 15px 0;">
+                    ✈️ 🏔️ 🏝️ 🌅
                 </div>
                 <p style="font-size: 1.4rem;">
                     इस साल हम जरूर साथ घूमने जाएँगे!<br>
-                    कहीं बहुत खूबसूरत जगह! 🌅
+                    वादा रहा! 🤝
                 </p>
             </div>
             
             <!-- Footer -->
             <div class="footer">
-                <p style="font-size: 1.3rem; margin-bottom: 15px;">
-                    प्यार, दुआओं और शुभकामनाओं के साथ
-                </p>
+                <p style="font-size: 1.3rem;">प्यार और शुभकामनाओं के साथ</p>
                 <div class="brother-name">विशाल</div>
-                <p style="font-size: 1.2rem; margin-top: 15px; color: var(--accent);">
-                    तुम्हारा छोटा भाई ❤️
+                <p style="margin-top: 15px; color: #FFD700;">
+                    तुम्हारा छोटा भाई ❤️<br>
+                    <span style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                        Made with love for my sister
+                    </span>
                 </p>
-                <div style="margin-top: 25px; font-size: 1rem; color: rgba(255,255,255,0.7);">
-                    Made with <i class="fas fa-heart" style="color: #FF6B8B;"></i> for my best sister
-                </div>
             </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const voiceBtn = document.getElementById('voiceBtn');
-            const voicePlayer = document.getElementById('voicePlayer');
-            const audio = document.getElementById('myAudio');
+        // Audio Elements
+        const bgMusic = document.getElementById('bgMusic');
+        const myVoice = document.getElementById('myVoice');
+        const voiceAudio = document.getElementById('voiceAudio');
+        const musicPlayer = document.getElementById('musicPlayer');
+        
+        // Background Music - Auto play with user interaction
+        let musicStarted = false;
+        
+        // Play Background Music
+        function playBackgroundMusic() {
+            if (!musicStarted) {
+                bgMusic.play().then(() => {
+                    musicStarted = true;
+                    createConfetti();
+                    showMessage("🎵 Happy New Year Music चल रहा है!");
+                }).catch(e => {
+                    showMessage("कृपया पहले कोई बटन दबाएं");
+                });
+            } else {
+                bgMusic.paused ? bgMusic.play() : bgMusic.pause();
+            }
+        }
+        
+        // Play Your Voice
+        function playMyVoice() {
+            // Direct audio link for testing - REPLACE WITH YOUR VOICE LINK
+            const voiceUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
             
-            // Show voice player when button is clicked
-            voiceBtn.addEventListener('click', function() {
-                voicePlayer.classList.add('show');
-                voiceBtn.innerHTML = '<i class="fas fa-check-circle"></i> अब नीचे आवाज सुनें <i class="fas fa-arrow-down"></i>';
-                voiceBtn.style.background = 'linear-gradient(45deg, #00FF9D, #00CC7A)';
-                voiceBtn.disabled = true;
-                
-                // Auto-scroll to voice player
-                voicePlayer.scrollIntoView({ behavior: 'smooth' });
-                
-                // Create confetti
+            // Set the audio source
+            voiceAudio.src = voiceUrl;
+            
+            // Play the audio
+            voiceAudio.play().then(() => {
                 createConfetti();
+                showMessage("🎤 विशाल की आवाज चल रही है... सुनिए!");
+            }).catch(e => {
+                showMessage("Audio play करने में problem. कृपया manually play button दबाएं");
             });
             
-            // Auto-play audio after 1 second (optional)
-            setTimeout(function() {
-                // Uncomment below line if you want auto-play
-                // audio.play();
-            }, 1000);
-            
-            // Confetti function
-            function createConfetti() {
-                const colors = ['#FF6B8B', '#00FF9D', '#FFD700', '#6A11CB'];
-                
-                for(let i = 0; i < 100; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.style.position = 'fixed';
-                    confetti.style.width = '12px';
-                    confetti.style.height = '12px';
-                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.borderRadius = '50%';
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.top = '-20px';
-                    confetti.style.zIndex = '9999';
-                    
-                    document.body.appendChild(confetti);
-                    
-                    const animation = confetti.animate([
-                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                        { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
-                    ], {
-                        duration: Math.random() * 3000 + 2000,
-                        easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
-                    });
-                    
-                    animation.onfinish = () => confetti.remove();
-                }
-            }
-        });
+            // Show voice player
+            document.getElementById('voicePlayer').style.display = 'block';
+        }
         
-        // Play audio function
-        function playAudio() {
-            const audio = document.getElementById('myAudio');
-            audio.play();
-            
-            // Show playing message
+        // Play Both
+        function playBoth() {
+            playBackgroundMusic();
+            setTimeout(playMyVoice, 1000);
+        }
+        
+        // Show Message
+        function showMessage(text) {
             const msg = document.createElement('div');
             msg.innerHTML = `
-                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                     background: rgba(0,0,0,0.85); padding: 20px; border-radius: 15px;
-                     border: 2px solid #00FF9D; z-index: 10000; color: white; text-align: center;">
-                    <h3 style="color: #FFD700;">
-                        <i class="fas fa-volume-up"></i> आवाज चल रही है...
-                    </h3>
-                    <p>ध्यान से सुनें दीदी! 👂</p>
-                    <button onclick="this.parentElement.remove()" 
-                            style="margin-top: 15px; padding: 8px 20px; background: #FF6B8B; 
-                                   color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        ठीक है
-                    </button>
+                <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                     background: rgba(0,0,0,0.8); color: #00FF9D; padding: 15px 25px;
+                     border-radius: 10px; border: 2px solid #FFD700; z-index: 10000;
+                     animation: slideDown 0.5s;">
+                    <i class="fas fa-check-circle"></i> ${text}
                 </div>
             `;
             document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 3000);
         }
+        
+        // Create Confetti
+        function createConfetti() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFD700', '#6A11CB', '#FFA500'];
+            
+            for(let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-20px';
+                
+                document.body.appendChild(confetti);
+                
+                // Animation
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+        
+        // Auto-start background music on first click (anywhere)
+        document.addEventListener('click', function initMusic() {
+            if (!musicStarted) {
+                // Can start music on first user interaction
+                musicStarted = true;
+            }
+            document.removeEventListener('click', initMusic);
+        });
+        
+        // Add some CSS for message animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translate(-50%, -100%); opacity: 0; }
+                to { transform: translate(-50%, 0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
