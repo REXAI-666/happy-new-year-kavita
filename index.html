@@ -18,12 +18,9 @@
             background-size: 400% 400%;
             animation: gradientBG 20s ease infinite;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             color: white;
-            overflow: hidden;
             padding: 20px;
+            /* REMOVED overflow: hidden - Yeh scroll rok raha tha */
         }
         
         @keyframes gradientBG {
@@ -32,9 +29,9 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Rose Petals Animation */
+        /* Rose Petals Animation - Fixed position */
         .rose-petal {
-            position: fixed;
+            position: fixed; /* Changed to fixed */
             width: 40px;
             height: 40px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FF69B4" d="M50,20 C60,10 80,15 85,30 C90,45 80,60 70,65 C60,70 45,65 40,55 C35,45 30,30 35,20 C40,10 50,10 50,20 Z"/></svg>') no-repeat;
@@ -47,6 +44,7 @@
         .container {
             max-width: 900px;
             width: 100%;
+            margin: 0 auto;
             position: relative;
             z-index: 2;
             animation: fadeIn 1.5s ease;
@@ -68,18 +66,7 @@
                 inset 0 0 100px rgba(255, 182, 193, 0.2);
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 20, 147, 0.1) 0%, transparent 70%);
-            z-index: -1;
+            margin-bottom: 50px; /* Added margin for scroll */
         }
         
         h1 {
@@ -115,29 +102,6 @@
             margin: 25px 0;
             border: 2px solid rgba(255, 215, 0, 0.3);
             position: relative;
-        }
-        
-        .message-box::before {
-            content: '💝';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            font-size: 2.5rem;
-            animation: float 3s infinite;
-        }
-        
-        .message-box::after {
-            content: '✨';
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            font-size: 2.5rem;
-            animation: float 3s infinite reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(10deg); }
         }
         
         .message-text {
@@ -251,31 +215,29 @@
             .section-title { font-size: 1.8rem; }
         }
         
-        /* Heart Animation */
-        .heart {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #FF1493;
-            animation: heartFloat 5s linear infinite;
-            opacity: 0.7;
-            pointer-events: none;
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
         
-        @keyframes heartFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #FF69B4, #FFD700);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #FF1493, #FFA500);
+        }
+        
+        /* Extra Space for Scroll */
+        .extra-space {
+            height: 100px;
+            opacity: 0;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -384,6 +346,9 @@
                     </span>
                 </p>
             </div>
+            
+            <!-- Extra space for better scroll -->
+            <div class="extra-space"></div>
         </div>
     </div>
 
@@ -408,7 +373,6 @@
                 petal.style.top = '-50px';
                 
                 // Random color variation
-                const colors = ['#FF69B4', '#FF1493', '#DB7093', '#FFB6C1'];
                 petal.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
                 
                 document.body.appendChild(petal);
@@ -453,9 +417,6 @@
             // Also play soft music
             bgMusic.volume = 0.3;
             bgMusic.play().catch(e => console.log("Music play error:", e));
-            
-            // Create floating hearts
-            createHearts();
         }
         
         // Play Background Music
@@ -476,27 +437,7 @@
                 createRosePetals(15);
             }).catch(e => {
                 showMessage("कृपया audio player में play button दबाएं");
-                // Auto-fallback to manual play
-                document.querySelector('audio').play();
             });
-        }
-        
-        // Create Floating Hearts
-        function createHearts() {
-            for(let i = 0; i < 20; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '❤️';
-                
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-                
-                document.body.appendChild(heart);
-                
-                // Remove after animation
-                setTimeout(() => heart.remove(), 6000);
-            }
         }
         
         // Show Message
@@ -514,27 +455,10 @@
             setTimeout(() => msg.remove(), 3000);
         }
         
-        // Add CSS for message animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideDown {
-                from { transform: translate(-50%, -100%); opacity: 0; }
-                to { transform: translate(-50%, 0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
-        
         // Auto-start rose petals after 3 seconds
         setTimeout(() => {
             createRosePetals(20);
         }, 3000);
-        
-        // Auto-create hearts occasionally
-        setInterval(() => {
-            if (Math.random() > 0.7) {
-                createHearts();
-            }
-        }, 8000);
     </script>
 </body>
 </html>
